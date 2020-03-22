@@ -11,7 +11,7 @@ const usePreventLeave = () => {
   // beforeunload: window창을 닫기 전에 확인 메시지 alert
   const enablePrevent = () => window.addEventListener("beforeunload", listener);
   const disablePrevent = () =>
-    window.addEventListener("beforeunload", listener);
+    window.removeEventListener("beforeunload", listener);
   return { enablePrevent, disablePrevent };
 };
 
