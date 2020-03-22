@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
-// callback 함수는 기본적으로 alert()와 동일한 기능을 수행한다.
-const useConfirm = (message = "", callback, rejection) => {
-  if (typeof callback !== "function") {
+const useConfirm = (message = "", onConfirm, onCancel) => {
+  if (!onConfirm || typeof onConfirm !== "function") {
+    return;
+  }
+  if (!onCancel || typeof onCancel !== "function") {
     return;
   }
 
   const confirmAction = () => {
-    // confirm() 함수는 message의 선택값에 따라 달라지며, 'yes'선택시 callback() 함수 실행됨.
+    // confirm() 함수는 message의 선택값에 따라 달라지며, alert()와 동일한 기능 수행함
+    // 'yes'선택시 callback() 함수 실행됨.
     if (confirm(message)) {
-      callback();
+      onConfirm();
     } else {
-      rejection();
+      onCancel();
     }
   };
   return confirmAction;
