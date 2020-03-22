@@ -12,7 +12,7 @@ const useNetwork = onchange => {
   useEffect(() => {
     window.addEventListener("online", handleChange);
     window.addEventListener("offline", handleChange);
-    () => {
+    return () => {
       window.removeEventListener("online", handleChange);
       window.removeEventListener("offline", handleChange);
     };
